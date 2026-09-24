@@ -31,6 +31,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Preflight — can runner reach yzsxg.fzu.edu.cn:443?
+        run: |
+          echo "=== DNS ==="
+          getent hosts yzsxg.fzu.edu.cn || nslookup yzsxg.fzu.edu.cn || true
+          echo "=== TCP 443 test ==="
+          timeout 10 bash -c '</dev/tcp/yzsxg.fzu.edu.cn/443' && echo "✅ TCP 443 OK" || echo "❌ TCP 443 FAILED"
+          echo "=== curl test ==="
+          curl -sS -o /dev/null -w "HTTP %{http_code} in %{time_total}s\n" --max-time 10 https://yzsxg.fzu.edu.cn/ || echo "❌ curl FAILED"
+
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
