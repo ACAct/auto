@@ -1,33 +1,15 @@
 name: checkin
 
-# ⚠️ 已关闭 schedule：福大 yzsxg.fzu.edu.cn 是校内域名，GitHub Actions 云端 runner
-#   在外网永远连不上 → 留着 schedule 只会每晚 16 档全部失败、刷爆 Server酱推送。
-#   改为只留 workflow_dispatch（手动触发）。本地签到由 Windows 任务计划兜底。
-on:
-  workflow_dispatch: {}   # 手动触发
-  # ⚠️ 已关闭 schedule：福大 yzsxg.fzu.edu.cn 校内域名，云端 runner 大概率连不上
-  # 要开定时？先手动触发一次看 Preflight 结果是不是 TCP 443 OK 再说
-  # schedule:
-  #   - cron: "45 13 * * *"   # BJ 21:45 第一档
-
-# 原 schedule 排档（注释保留以便以后需要时恢复）：
+# ✅ schedule 已开启：2026-09-28 实测 GitHub Actions runner 能连通 yzsxg.fzu.edu.cn:443
+#   4 档和本地 Windows 任务计划同时间（兜底接力），Preflight 自动探测连不上就 Early Exit 不刷失败推送
 # cron 是 UTC 时间，北京时间 = UTC + 8
-#   - cron: "30 8 * * *"     # BJ 16:30
-#   - cron: "0 9 * * *"      # BJ 17:00
-#   - cron: "30 9 * * *"     # BJ 17:30
-#   - cron: "0 10 * * *"     # BJ 18:00
-#   - cron: "30 10 * * *"    # BJ 18:30
-#   - cron: "0 11 * * *"     # BJ 19:00
-#   - cron: "30 11 * * *"    # BJ 19:30
-#   - cron: "0 12 * * *"     # BJ 20:00
-#   - cron: "30 12 * * *"    # BJ 20:30
-#   - cron: "0 13 * * *"     # BJ 21:00
-#   - cron: "30 13 * * *"    # BJ 21:30
-#   - cron: "0 14 * * *"     # BJ 22:00
-#   - cron: "30 14 * * *"    # BJ 22:30
-#   - cron: "0 15 * * *"     # BJ 23:00
-#   - cron: "30 15 * * *"    # BJ 23:30
-#   - cron: "55 15 * * *"    # BJ 23:55 末班
+on:
+  workflow_dispatch: {}
+  schedule:
+    - cron: "45 13 * * *"   # BJ 21:45
+    - cron: "0 14 * * *"    # BJ 22:00
+    - cron: "15 14 * * *"   # BJ 22:15
+    - cron: "30 14 * * *"   # BJ 22:30
 
 jobs:
   checkin:
