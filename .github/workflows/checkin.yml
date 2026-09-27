@@ -1,15 +1,27 @@
 name: checkin
 
 # ✅ schedule 已开启：2026-09-28 实测 GitHub Actions runner 能连通 yzsxg.fzu.edu.cn:443
-#   4 档和本地 Windows 任务计划同时间（兜底接力），Preflight 自动探测连不上就 Early Exit 不刷失败推送
+#   16 档覆盖 GitHub 调度延迟（cron 可能晚几分钟触发），Preflight 自动探测连不上就 Early Exit
 # cron 是 UTC 时间，北京时间 = UTC + 8
 on:
   workflow_dispatch: {}
   schedule:
-    - cron: "45 13 * * *"   # BJ 21:45
-    - cron: "0 14 * * *"    # BJ 22:00
-    - cron: "15 14 * * *"   # BJ 22:15
-    - cron: "30 14 * * *"   # BJ 22:30
+    - cron: "30 8 * * *"     # BJ 16:30
+    - cron: "0 9 * * *"      # BJ 17:00
+    - cron: "30 9 * * *"     # BJ 17:30
+    - cron: "0 10 * * *"     # BJ 18:00
+    - cron: "30 10 * * *"    # BJ 18:30
+    - cron: "0 11 * * *"     # BJ 19:00
+    - cron: "30 11 * * *"    # BJ 19:30
+    - cron: "0 12 * * *"     # BJ 20:00
+    - cron: "30 12 * * *"    # BJ 20:30
+    - cron: "0 13 * * *"     # BJ 21:00
+    - cron: "30 13 * * *"    # BJ 21:30
+    - cron: "0 14 * * *"     # BJ 22:00
+    - cron: "30 14 * * *"    # BJ 22:30
+    - cron: "0 15 * * *"     # BJ 23:00
+    - cron: "30 15 * * *"    # BJ 23:30
+    - cron: "55 15 * * *"    # BJ 23:55 末班
 
 jobs:
   checkin:
