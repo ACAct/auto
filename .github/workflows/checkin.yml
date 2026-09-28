@@ -3,6 +3,7 @@ name: checkin
 # ✅ schedule 已开启：2026-09-28 实测 GitHub Actions runner 能连通 yzsxg.fzu.edu.cn:443
 #   16 档覆盖 GitHub 调度延迟（cron 可能晚几分钟触发），Preflight 自动探测连不上就 Early Exit
 # cron 是 UTC 时间，北京时间 = UTC + 8
+# v3: force re-register schedule (2026-09-28 22:00)
 on:
   workflow_dispatch: {}
   schedule:
